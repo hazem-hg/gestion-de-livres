@@ -1,0 +1,21 @@
+version: '3'
+services:
+  authenticationservice:
+    container_name: authenticationService
+    restart: always
+    build: .
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '8081:8081'
+    links:
+      - mongodb1
+  mongodb1:
+    image: mongo:4.4.6
+    ports:
+      - '27018:27018'
+    volumes:
+      - data1:/data1/db
+volumes:
+  data1:
